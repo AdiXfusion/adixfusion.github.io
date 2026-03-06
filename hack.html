@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>ADI X FUSION HACK MODE</title>
+<title>AdiXfusion Hacker Mode</title>
 
 <style>
 body{
@@ -9,7 +9,7 @@ margin:0;
 background:black;
 color:#00ff00;
 font-family:monospace;
-text-align:center;
+overflow:hidden;
 }
 
 canvas{
@@ -19,13 +19,20 @@ left:0;
 z-index:-1;
 }
 
+.terminal{
+position:fixed;
+bottom:20px;
+left:50%;
+transform:translateX(-50%);
+}
+
 input{
-margin-top:200px;
-padding:10px;
-font-size:20px;
 background:black;
 color:#00ff00;
 border:1px solid #00ff00;
+padding:10px;
+font-size:18px;
+width:300px;
 }
 </style>
 
@@ -33,25 +40,13 @@ border:1px solid #00ff00;
 
 <body>
 
-<h1>Enter Access Code</h1>
-
-<input id="code" placeholder="Enter Code">
-
 <canvas id="matrix"></canvas>
 
+<div class="terminal">
+<input id="cmd" placeholder="type command...">
+</div>
+
 <script>
-
-const input = document.getElementById("code")
-
-input.addEventListener("keyup",function(){
-
-if(input.value === "ADIXFUSION"){
-startMatrix()
-}
-
-})
-
-function startMatrix(){
 
 const canvas = document.getElementById("matrix")
 const ctx = canvas.getContext("2d")
@@ -59,9 +54,8 @@ const ctx = canvas.getContext("2d")
 canvas.height = window.innerHeight
 canvas.width = window.innerWidth
 
-const letters = "ADIXFUSION0123456789$#@"
+const letters = "ADIXFUSION0123456789#$%^&*"
 const fontSize = 16
-
 const columns = canvas.width/fontSize
 
 const drops = []
@@ -69,6 +63,8 @@ const drops = []
 for(let x=0;x<columns;x++){
 drops[x]=1
 }
+
+let speed = 40
 
 function draw(){
 
@@ -93,9 +89,18 @@ drops[i]++
 
 }
 
-setInterval(draw,33)
+setInterval(draw,speed)
 
+const input = document.getElementById("cmd")
+
+input.addEventListener("keyup",function(){
+
+if(input.value.toLowerCase().includes("adi")){
+speed = 5
+setInterval(draw,speed)
 }
+
+})
 
 </script>
 
