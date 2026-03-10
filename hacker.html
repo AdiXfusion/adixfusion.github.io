@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Hacker Terminal</title>
+
+<style>
+body{
+background:black;
+color:#00ff00;
+font-family: monospace;
+margin:0;
+overflow:hidden;
+}
+
+#terminal{
+position:absolute;
+top:0;
+left:0;
+padding:20px;
+font-size:18px;
+}
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-1;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="matrix"></canvas>
+
+<div id="terminal"></div>
+
+<script>
+
+let terminal = document.getElementById("terminal");
+
+let lines = [
+"Connecting to secure server...",
+"IP Found: 192.168.34.22",
+"Bypassing firewall...",
+"Decrypting password...",
+"Access Granted ✔",
+"Downloading secret files...",
+"Running exploit code...",
+"Uploading payload...",
+"System Control Achieved"
+];
+
+let i=0;
+let j=0;
+let text="";
+
+function type(){
+if(i<lines.length){
+
+if(j<lines[i].length){
+text+=lines[i][j];
+terminal.innerHTML=text+"_";
+j++;
+setTimeout(type,40);
+}
+else{
+text+="<br>";
+i++;
+j=0;
+setTimeout(type,400);
+}
+
+}
+
+}
+
+type();
+
+
+/* MATRIX EFFECT */
+
+let canvas=document.getElementById("matrix");
+let ctx=canvas.getContext("2d");
+
+canvas.height=window.innerHeight;
+canvas.width=window.innerWidth;
+
+let letters="01ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+letters=letters.split("");
+
+let fontSize=16;
+let columns=canvas.width/fontSize;
+
+let drops=[];
+
+for(let x=0;x<columns;x++)
+drops[x]=1;
+
+function draw(){
+
+ctx.fillStyle="rgba(0,0,0,0.05)";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+
+ctx.fillStyle="#0f0";
+ctx.font=fontSize+"px monospace";
+
+for(let i=0;i<drops.length;i++){
+
+let text=letters[Math.floor(Math.random()*letters.length)];
+
+ctx.fillText(text,i*fontSize,drops[i]*fontSize);
+
+if(drops[i]*fontSize>canvas.height && Math.random()>0.975)
+drops[i]=0;
+
+drops[i]++;
+}
+
+}
+
+setInterval(draw,33);
+
+</script>
+
+</body>
+</html>
