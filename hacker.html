@@ -27,15 +27,6 @@ left:20px;
 z-index:2;
 }
 
-input{
-background:black;
-border:none;
-color:#00ff00;
-font-size:16px;
-outline:none;
-font-family:monospace;
-}
-
 #flash{
 position:fixed;
 top:0;
@@ -57,25 +48,12 @@ pointer-events:none;
 <div id="flash"></div>
 
 <div id="terminal">
-<p>root@kali:~# <input id="cmd" autocomplete="off"></p>
 <pre id="out"></pre>
 </div>
 
 <script>
 
-/* INPUT FOCUS FIX */
-
-let cmd=document.getElementById("cmd")
-
-window.onload=function(){
-cmd.focus()
-}
-
-document.body.onclick=function(){
-cmd.focus()
-}
-
-/* MATRIX */
+/* MATRIX BACKGROUND */
 
 let canvas=document.getElementById("matrix")
 let ctx=canvas.getContext("2d")
@@ -119,7 +97,7 @@ drops[i]++
 
 setInterval(draw,33)
 
-/* TERMINAL */
+/* TERMINAL AUTO RUN */
 
 let out=document.getElementById("out")
 let flash=document.getElementById("flash")
@@ -128,19 +106,16 @@ function randomIP(){
 return "192.168."+Math.floor(Math.random()*255)+"."+Math.floor(Math.random()*255)
 }
 
-cmd.addEventListener("keydown",function(e){
+function startHack(){
 
-if(e.key==="Enter"){
-
-let v=cmd.value.toLowerCase()
-
-if(v==="ram"){
-
-out.innerHTML+="Starting RAM exploit...\n"
+out.innerHTML+="Booting Kali Linux...\n"
+out.innerHTML+="Initializing network tools...\n\n"
 
 let scan=setInterval(()=>{
 
 out.innerHTML+="Scanning "+randomIP()+" ... OPEN\n"
+
+window.scrollTo(0,document.body.scrollHeight)
 
 },120)
 
@@ -150,7 +125,7 @@ clearInterval(scan)
 
 out.innerHTML+="\nACCESS GRANTED ✔\n"
 
-flash.style.opacity="0.6"
+flash.style.opacity="0.7"
 
 setTimeout(()=>{
 flash.style.opacity="0"
@@ -164,23 +139,15 @@ out.innerHTML+=
 "Uploading exploit...\n"+
 "Root access confirmed...\n\n"
 
+window.scrollTo(0,document.body.scrollHeight)
+
 },150)
 
 },4000)
 
 }
 
-else{
-
-out.innerHTML+="command not found\n"
-
-}
-
-cmd.value=""
-
-}
-
-})
+window.onload=startHack
 
 </script>
 
