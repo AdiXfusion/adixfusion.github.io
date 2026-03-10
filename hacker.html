@@ -148,21 +148,32 @@ window.scrollTo(0,document.body.scrollHeight)
 }
 
 window.onload=startHack
+<button onclick="refreshPage()" class="refresh-btn">Refresh</button>
+
+<script>
+function refreshPage() {
+  location.reload();
+}
+</script>
+
 <style>
 .refresh-btn{
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background: black;
-  color: lime;
-  border: 1px solid lime;
+  background: red;
+  color: white;
+  border: 1px solid red;
   padding: 10px 20px;
   font-family: monospace;
   cursor: pointer;
 }
+
 .refresh-btn:hover{
-  background: lime;
-  color: black;
+  background: darkred;
+  color: white;
+}
+</style>
 }
 </style>
 </script>
